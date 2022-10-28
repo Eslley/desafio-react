@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/desafio-react/static/css/main.d80134cd.css",
-    "main.js": "/desafio-react/static/js/main.c15b0037.js",
+    "main.js": "/desafio-react/static/js/main.96a10a01.js",
     "static/media/roboto-all-500-normal.woff": "/desafio-react/static/media/roboto-all-500-normal.0ab669b7a0d19b178f57.woff",
     "static/media/roboto-all-700-normal.woff": "/desafio-react/static/media/roboto-all-700-normal.a457fde362a540fcadff.woff",
     "static/media/roboto-all-400-normal.woff": "/desafio-react/static/media/roboto-all-400-normal.c5d001fa922fa66a147f.woff",
@@ -36,10 +36,10 @@
     "static/media/roboto-greek-ext-700-normal.woff2": "/desafio-react/static/media/roboto-greek-ext-700-normal.bd9854c751441ccc1a70.woff2",
     "index.html": "/desafio-react/index.html",
     "main.d80134cd.css.map": "/desafio-react/static/css/main.d80134cd.css.map",
-    "main.c15b0037.js.map": "/desafio-react/static/js/main.c15b0037.js.map"
+    "main.96a10a01.js.map": "/desafio-react/static/js/main.96a10a01.js.map"
   },
   "entrypoints": [
     "static/css/main.d80134cd.css",
-    "static/js/main.c15b0037.js"
+    "static/js/main.96a10a01.js"
   ]
 }
