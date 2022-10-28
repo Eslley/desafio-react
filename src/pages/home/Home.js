@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import CardForm from "../../components/CardForm"
 import FormDadosPessoais from "../../components/FormDadosPessoais"
+import FormDestinosInteresse from "../../components/FormDestinosInteresse"
 
 const defaultValues = {
     name: "",
@@ -32,15 +33,17 @@ function Home() {
                     } />
                 </Grid>
 
-                <Grid item container justifyContent="center" xs={12} md={6}>
-                    {/* Form de destinos */}
+                <Grid item container mb="1em" justifyContent="center" xs={12} md={6}>
+                    <CardForm title="Destinos de Interresse" content={
+                        <FormDestinosInteresse register={register} errors={errors} />
+                    } />
                 </Grid>
                 
             </Grid>
            
 
             <Grid container justifyContent="center">
-                <Grid item container justifyContent="center" mb="1em" xs={5} sm={3} md={2}>
+                <Grid item container justifyContent="center" xs={5} sm={3} md={2}>
                     <Box sx={{ mt: '2em' }}>
                         <Fab onClick={resetForm} variant="extended" color="primary" aria-label="add">
                             <ClearAll />
@@ -49,7 +52,7 @@ function Home() {
                     </Box>
                 </Grid>
 
-                <Grid item container justifyContent="center" mb="1em" xs={5} sm={3} md={2}>
+                <Grid item container justifyContent="center" xs={5} sm={3} md={2}>
                     <Box disabled={errors.name} sx={{ mt: '2em' }}>
                         <Fab type="submit" variant="extended" color="primary" aria-label="add">
                             <Save />

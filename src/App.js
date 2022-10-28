@@ -4,7 +4,7 @@ import Home from "./pages/home/Home";
 function App() {
   return (
     <div className="App">
-      <Container sx={{ minHeight: '80%', mt: '3em', pb: '1em' }}>
+      <Container sx={{ height: '100%', mt: '10%', pb: '1em', }}>
         <Home />
       </Container>
     </div>
