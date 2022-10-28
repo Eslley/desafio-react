@@ -1,6 +1,5 @@
 import { AccountCircle, Description, Email, Phone } from "@mui/icons-material"
 import { Grid, InputAdornment, TextField } from "@mui/material"
-import { useEffect } from "react"
 import util from "../providers/util"
 
 function Form({ register, errors }) {
