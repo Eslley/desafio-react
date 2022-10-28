@@ -24,13 +24,10 @@ function getStyles(name, countryName) {
     };
 }
 
-function FormDestinosInteresse({ register, errors }) {
+function FormDestinosInteresse({ formData, setFormData, countryName, setCountryName, cityName, setCityName }) {
 
     const [countries, setCountries] = useState([])
     const [cities, setCities] = useState([])
-
-    const [countryName, setCountryName] = useState([])
-    const [cityName, setCityName] = useState([])
 
 
     useEffect(() => {
@@ -67,6 +64,37 @@ function FormDestinosInteresse({ register, errors }) {
         )
     }
 
+    function addCountry(e) {
+        const data = e.target.dataset
+        if(!(data.code in formData)) {    
+            setFormData({ ...formData, [data.code]: {name: data.value, cities: []} })
+        }
+    }
+
+    function addCity(e) {
+        const data = e.target.dataset
+        const countryName = data.value.split(',').pop().trim()
+        if(data.countryCode in formData) {
+            let verificaCidade = false
+            formData[data.countryCode].cities.forEach(city => {
+                if(city.cityId === data.cityId) {
+                    let cidades = formData[data.countryCode].cities.filter((city) => city.cityId !== data.cityId)
+                    setFormData({ ...formData, [data.countryCode]: { name: countryName, cities: cidades} })
+                    verificaCidade = true
+                    return
+                }
+            })
+            if(!verificaCidade){
+                let cidades = formData[data.countryCode].cities
+                cidades.push(data)
+                setFormData({ ...formData, [data.countryCode]: { name: countryName, cities: cidades} })
+            } 
+        } else {
+            const cidades = [data]
+            setFormData({ ...formData, [data.countryCode]: { name: countryName, cities: cidades} })
+        }
+    }
+
     return (
         <Grid container direction="column" textAlign="center">
             <Grid sx={{ marginY: "0.6em" }} item>
@@ -91,7 +119,9 @@ function FormDestinosInteresse({ register, errors }) {
                             <MenuItem
                                 key={index}
                                 value={country.name_ptbr}
+                                data-code={country.code}
                                 style={getStyles(country.name_ptbr, countryName)}
+                                onClick={addCountry}
                             >
                                 {country.name_ptbr}
                             </MenuItem>
@@ -122,7 +152,12 @@ function FormDestinosInteresse({ register, errors }) {
                             <MenuItem
                                 key={index}
                                 value={city.name_ptbr}
+                                data-city-id={city.id}
+                                data-country-code={city.country_code}
+                                data-lat={city.lat}
+                                data-log={city.log}
                                 style={getStyles(city.name_ptbr, cityName)}
+                                onClick={addCity}
                             >
                                 {city.name_ptbr}
                             </MenuItem>
