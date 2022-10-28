@@ -19,7 +19,7 @@ function Form({ register, errors }) {
             <Grid item>
                 <TextField
                     margin='normal'
-                    sx={{ width: "90%" }}
+                    sx={{ width: 300 }}
                     label="Nome"
                     type="text"
                     InputProps={{
@@ -38,7 +38,7 @@ function Form({ register, errors }) {
             <Grid item>
                 <TextField
                     margin='normal'
-                    sx={{ width: "90%" }}
+                    sx={{ width: 300 }}
                     label="Email"
                     type="email"
                     InputProps={{
@@ -62,7 +62,7 @@ function Form({ register, errors }) {
             <Grid item>
                 <TextField
                     margin='normal'
-                    sx={{ width: "90%" }}
+                    sx={{ width: 300 }}
                     label="Telefone"
                     type="tel"
                     InputProps={{
@@ -87,7 +87,7 @@ function Form({ register, errors }) {
             <Grid item>
                 <TextField
                     margin='normal'
-                    sx={{ width: "90%" }}
+                    sx={{ width: 300 }}
                     label="CPF"
                     type="text"
                     InputProps={{

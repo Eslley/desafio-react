@@ -5,7 +5,7 @@ function CardForm({ title, content }) {
         <Box sx={{ minWidth: 350, minHeight: 200 }}>
             <Card style={{ height: '100%' }} variant="outlined">
                 <CardContent>
-                    <Typography sx={{ textAlign: 'center', mb: '1em' }} fontSize="20px" variant="h5" component="div">
+                    <Typography sx={{ fontWeight: 500, textAlign: 'center', mb: '1em' }} fontSize="20px" variant="h5" component="div">
                         {title}
                     </Typography>
                     {content}
