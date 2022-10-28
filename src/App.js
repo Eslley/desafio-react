@@ -1,5 +1,6 @@
 import { Container } from "@mui/material";
 import AlertMessageProvider from "./components/AlertMessageProvider";
+import ToastMessageProvider from "./components/ToastMessageProvider";
 import Home from "./pages/home/Home";
 
 function App() {
@@ -7,7 +8,9 @@ function App() {
     <div className="App">
       <Container sx={{ height: '100%', mt: '10%', pb: '1em', }}>
         <AlertMessageProvider>
-          <Home />
+          <ToastMessageProvider>
+            <Home />
+          </ToastMessageProvider>
         </AlertMessageProvider>
       </Container>
     </div>
