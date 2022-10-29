@@ -59,6 +59,8 @@ function Home() {
 
     function resetForm() {
         reset(defaultValues)
+        setErrorCities('')
+        setErrorCountries('')
         setFormData({})
         setCountryName([])
         setCityName([])

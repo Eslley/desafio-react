@@ -18,15 +18,6 @@ const style = {
 function Map({ open, setOpen, user }) {
 
     const handleClose = () => setOpen(false)
-    const [marks, setMakers] = []
-
-    useEffect(() => {
-        console.log()
-        // for (let [key, value] of Object.entries(user.places)) {
-        //     console.log(key, value);
-        // }
-    }, [user])
-
 
     return (
         <>
@@ -42,14 +33,14 @@ function Map({ open, setOpen, user }) {
                             style={{
                                 width: '100%',
                                 height: '80vh'
-                            }} center={[20, 0]} zoom={2} scrollWheelZoom={false}>
+                            }} center={[20, 0]} zoom={2} scrollWheelZoom={true}>
                             <TileLayer
                                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                             />
                             {Object.entries(user.places).map((item) => (
-                                item[1].cities.map((city) => (
-                                    <Marker position={[city.lat, city.log]}>
+                                item[1].cities.map((city, index) => (
+                                    <Marker key={index} position={[city.lat, city.log]}>
                                         <Popup>
                                             {city.value.split(',')[0]} <br /> {item[1].name}
                                         </Popup>
