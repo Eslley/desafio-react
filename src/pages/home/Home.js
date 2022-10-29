@@ -22,7 +22,27 @@ function Home() {
     const { register, formState: { errors }, handleSubmit, reset } = useForm({ mode: 'onChange' })
     const onSubmit = data => {
         const localData = { ...data, places: formData }
+        if(!validateSelects()) {
+            showToast('O formulário contém erros!', 4000)
+            return
+        }
         saveLocalStorage(localData)
+    }
+
+    function validateSelects() {
+        let validate = true
+
+        if (countryName.length === 0){
+            setErrorCountries('Informe os países de interesse')
+            validate = false
+        }
+
+        if (cityName.length === 0) {
+            setErrorCities('Informe as cidades de interesse')
+            validate = false
+        }
+
+        return validate
     }
 
     const [formData, setFormData] = useState({})
@@ -33,6 +53,9 @@ function Home() {
     const { showAlert } = useAlertMessage()
     const { showToast } = useToastMessage()
     const [showTable, setShowTable] = useState(false)
+
+    const [ errorCities, setErrorCities ] = useState('')
+    const [ errorCountries, setErrorCountries ] = useState('')
 
     function resetForm() {
         reset(defaultValues)
@@ -94,7 +117,11 @@ function Home() {
                                     countryName={countryName}
                                     setCountryName={setCountryName}
                                     cityName={cityName}
-                                    setCityName={setCityName} />
+                                    setCityName={setCityName}
+                                    errorCities={errorCities}
+                                    setErrorCities={setErrorCities}
+                                    errorCountries={errorCountries}
+                                    setErrorCountries={setErrorCountries} />
                             } />
                         </Grid>
 

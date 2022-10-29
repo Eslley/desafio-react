@@ -1,4 +1,4 @@
-import { Box, Chip, FormControl, Grid, InputLabel, MenuItem, OutlinedInput, Select } from "@mui/material";
+import { Box, Chip, FormControl, FormHelperText, Grid, InputLabel, MenuItem, OutlinedInput, Select } from "@mui/material";
 import { useEffect, useState } from "react";
 import apiServices from "../providers/http"
 
@@ -23,10 +23,22 @@ function getStyles(name, countryName) {
     };
 }
 
-function FormDestinosInteresse({ formData, setFormData, countryName, setCountryName, cityName, setCityName }) {
+function FormDestinosInteresse({
+    formData,
+    setFormData,
+    countryName,
+    setCountryName,
+    cityName,
+    setCityName,
+    errorCities,
+    setErrorCities,
+    errorCountries,
+    setErrorCountries }) {
 
     const [countries, setCountries] = useState([])
+
     const [cities, setCities] = useState([])
+    const [filteredCities, setFilteredCities] = useState([])
 
 
     useEffect(() => {
@@ -38,7 +50,11 @@ function FormDestinosInteresse({ formData, setFormData, countryName, setCountryN
 
         apiServices.getCities()
             .then(res => {
-                setCities(res.data)
+                //remove cidades que não tem atributos name_ptbr, lat ou log 
+                let cities = res.data.filter((city) => {
+                    return city.name_ptbr != null && city.lat != null && city.log != null
+                })
+                setCities(cities)
             })
             .catch(err => console.log(err))
     }, [])
@@ -47,10 +63,11 @@ function FormDestinosInteresse({ formData, setFormData, countryName, setCountryN
         const {
             target: { value },
         } = event;
+
         setCountryName(
-            // On autofill we get a stringified value.
             typeof value === 'string' ? value.split(',') : value,
         )
+        setErrorCountries('')
     }
 
     const handleChangeCity = (event) => {
@@ -58,46 +75,68 @@ function FormDestinosInteresse({ formData, setFormData, countryName, setCountryN
             target: { value },
         } = event;
         setCityName(
-            // On autofill we get a stringified value.
             typeof value === 'string' ? value.split(',')[0] : value,
         )
+        setErrorCities('')
     }
 
     function addCountry(e) {
         const data = e.target.dataset
-        if(!(data.code in formData)) {    
-            setFormData({ ...formData, [data.code]: {name: data.value, cities: []} })
+
+        if (!(data.code in formData)) {
+            //filtra as cidades do país selecionado
+            let addCities = cities.filter((city) => city.country_code === data.code)
+            addCities = addCities.concat(filteredCities)
+
+            setFilteredCities(addCities)
+            setFormData({ ...formData, [data.code]: { name: data.value, cities: [] } })
+        } else {
+            //remove as cidades do país que saiu da seleção
+            let cities = filteredCities.filter((city) => city.country_code !== data.code)
+            setFilteredCities(cities)
+            let citiesNames = cityName.filter((city) => {
+                let achou = false
+                cities.forEach(element => {
+                    if (city === element.name_ptbr)
+                        achou = true
+                })
+                return achou
+            })
+            setCityName(citiesNames)
+            let newFormData = { ...formData }
+            delete newFormData[data.code]
+            setFormData({ ...newFormData })
         }
     }
 
     function addCity(e) {
         const data = e.target.dataset
         const countryName = data.value.split(',').pop().trim()
-        if(data.countryCode in formData) {
+        if (data.countryCode in formData) {
             let verificaCidade = false
             formData[data.countryCode].cities.forEach(city => {
-                if(city.cityId === data.cityId) {
+                if (city.cityId === data.cityId) {
                     let cidades = formData[data.countryCode].cities.filter((city) => city.cityId !== data.cityId)
-                    setFormData({ ...formData, [data.countryCode]: { name: countryName, cities: cidades} })
+                    setFormData({ ...formData, [data.countryCode]: { name: countryName, cities: cidades } })
                     verificaCidade = true
                     return
                 }
             })
-            if(!verificaCidade){
+            if (!verificaCidade) {
                 let cidades = formData[data.countryCode].cities
                 cidades.push(data)
-                setFormData({ ...formData, [data.countryCode]: { name: countryName, cities: cidades} })
-            } 
+                setFormData({ ...formData, [data.countryCode]: { name: countryName, cities: cidades } })
+            }
         } else {
             const cidades = [data]
-            setFormData({ ...formData, [data.countryCode]: { name: countryName, cities: cidades} })
+            setFormData({ ...formData, [data.countryCode]: { name: countryName, cities: cidades } })
         }
     }
 
     return (
         <Grid container direction="column" textAlign="center">
-            <Grid sx={{ marginY: "0.6em" }} item>
-                <FormControl sx={{ m: 1, width: 300 }}>
+            <Grid item>
+                <FormControl sx={{ m: 1, width: 300 }} error={errorCountries !== ''}>
                     <InputLabel id="paises-label">Países</InputLabel>
                     <Select
                         labelId="paises-label"
@@ -113,6 +152,7 @@ function FormDestinosInteresse({ formData, setFormData, countryName, setCountryN
                             </Box>
                         )}
                         MenuProps={MenuProps}
+                        error={errorCountries !== ''}
                     >
                         {countries.map((country, index) => (
                             <MenuItem
@@ -126,12 +166,13 @@ function FormDestinosInteresse({ formData, setFormData, countryName, setCountryN
                             </MenuItem>
                         ))}
                     </Select>
+                    <FormHelperText>{errorCountries !== '' && errorCountries}</FormHelperText>
                 </FormControl>
             </Grid>
 
             <Grid sx={{ marginY: "0.6em" }} item>
-                <FormControl sx={{ m: 1, width: 300 }}>
-                <InputLabel id="cidades-label">Cidades</InputLabel>
+                <FormControl sx={{ m: 1, width: 300 }} error={errorCities !== ''}>
+                    <InputLabel id="cidades-label">Cidades</InputLabel>
                     <Select
                         labelId="cidades-label"
                         multiple
@@ -140,14 +181,15 @@ function FormDestinosInteresse({ formData, setFormData, countryName, setCountryN
                         input={<OutlinedInput id="select-multiple-chip" label="Cidades" />}
                         renderValue={(selected) => (
                             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                                {selected.map((value,index) => (
+                                {selected.map((value, index) => (
                                     <Chip color="primary" key={index} label={value.split(',')[0]} />
                                 ))}
                             </Box>
                         )}
                         MenuProps={MenuProps}
+                        error={errorCities !== ''}
                     >
-                        {cities.map((city, index) => (
+                        {filteredCities.map((city, index) => (
                             <MenuItem
                                 key={index}
                                 value={city.name_ptbr}
@@ -162,6 +204,7 @@ function FormDestinosInteresse({ formData, setFormData, countryName, setCountryN
                             </MenuItem>
                         ))}
                     </Select>
+                    <FormHelperText>{errorCities !== '' && errorCities}</FormHelperText>
                 </FormControl>
             </Grid>
         </Grid>
