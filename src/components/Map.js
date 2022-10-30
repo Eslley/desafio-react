@@ -1,5 +1,4 @@
-import { Box, Modal } from "@mui/material"
-import { useEffect, useState } from "react";
+import { Box, Modal, Typography } from "@mui/material"
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
 
 const style = {
@@ -29,6 +28,9 @@ function Map({ open, setOpen, user }) {
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx={style}>
+                        <Typography id="modal-modal-title" textAlign='center' variant="h6" component="h2">
+                            Destinos de {user.name}
+                        </Typography>
                         <MapContainer
                             style={{
                                 width: '100%',
