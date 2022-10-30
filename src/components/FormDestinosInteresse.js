@@ -1,3 +1,4 @@
+import { Delete } from "@mui/icons-material";
 import { Box, Chip, FormControl, FormHelperText, Grid, InputLabel, MenuItem, OutlinedInput, Select } from "@mui/material";
 import { useEffect, useState } from "react";
 import apiServices from "../providers/http"
@@ -16,8 +17,7 @@ const MenuPropsCountries = {
     PaperProps: {
         style: {
             maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250,
-            '.MuiSelected': { backgroundColor: 'red' }
+            width: 250
         },
     },
 };
@@ -40,13 +40,13 @@ function FormDestinosInteresse({
     errorCities,
     setErrorCities,
     errorCountries,
-    setErrorCountries }) {
+    setErrorCountries,
+    filteredCities,
+     setFilteredCities }) {
 
     const [countries, setCountries] = useState([])
 
     const [cities, setCities] = useState([])
-    const [filteredCities, setFilteredCities] = useState([])
-
 
     useEffect(() => {
         apiServices.getCountries()
@@ -140,6 +140,11 @@ function FormDestinosInteresse({
         }
     }
 
+    // function removeCountry(country) {
+    //     const newCountries = countryName.filter(c => c !== country)
+    //     setCountryName(newCountries)
+    // }
+
     return (
         <Grid container direction="column" textAlign="center">
             <Grid item>
@@ -152,9 +157,10 @@ function FormDestinosInteresse({
                         onChange={handleChangeCountry}
                         input={<OutlinedInput id="select-multiple-chip" label="Países" />}
                         renderValue={(selected) => (
-                            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, zIndex: 999 }}>
+                            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, zIndex: 9999 }}>
                                 {selected.map((value) => (
-                                    <Chip onDelete={handleChangeCountry} color="primary" key={value} label={value} />
+                                    <Chip
+                                        color="primary" key={value} label={value} />
                                 ))}
                             </Box>
                         )}
@@ -166,10 +172,11 @@ function FormDestinosInteresse({
                                 key={index}
                                 value={country.name_ptbr}
                                 data-code={country.code}
-                                sx={{ 
-                                    whiteSpace: 'pre-wrap', 
-                                    overflowWrap: 'break-word', 
-                                    '&.Mui-selected': { backgroundColor: 'rgba(25, 118, 210, 0.15);' } }}
+                                sx={{
+                                    whiteSpace: 'pre-wrap',
+                                    overflowWrap: 'break-word',
+                                    '&.Mui-selected': { backgroundColor: 'rgba(25, 118, 210, 0.15);' }
+                                }}
                                 onClick={addCountry}
                             >
                                 {country.name_ptbr}
@@ -207,15 +214,16 @@ function FormDestinosInteresse({
                                 data-country-code={city.country_code}
                                 data-lat={city.lat}
                                 data-log={city.log}
-                                sx={{ 
-                                    whiteSpace: 'pre-wrap', 
+                                sx={{
+                                    whiteSpace: 'pre-wrap',
                                     overflowWrap: 'break-word',
-                                    '&.Mui-selected': { backgroundColor: 'rgba(25, 118, 210, 0.15);' } }}
+                                    '&.Mui-selected': { backgroundColor: 'rgba(25, 118, 210, 0.15);' }
+                                }}
                                 onClick={addCity}
                             >
                                 {city.name_ptbr}
                             </MenuItem>
-                        )) : 
+                        )) :
                             <MenuItem>
                                 Sem cidades
                             </MenuItem>

@@ -58,6 +58,8 @@ function Home() {
     const [errorCities, setErrorCities] = useState('')
     const [errorCountries, setErrorCountries] = useState('')
 
+    const [filteredCities, setFilteredCities] = useState([])
+
     function resetForm() {
         reset(defaultValues)
         setErrorCities('')
@@ -65,6 +67,7 @@ function Home() {
         setFormData({})
         setCountryName([])
         setCityName([])
+        setFilteredCities([])
     }
 
     function saveLocalStorage(data) {
@@ -107,7 +110,9 @@ function Home() {
                             errorCities={errorCities}
                             setErrorCities={setErrorCities}
                             errorCountries={errorCountries}
-                            setErrorCountries={setErrorCountries} />
+                            setErrorCountries={setErrorCountries}
+                            filteredCities={filteredCities}
+                            setFilteredCities={setFilteredCities} />
                     } />
                 </Grid>
 
