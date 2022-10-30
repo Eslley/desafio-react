@@ -19,10 +19,23 @@
 
 **Snapshot da aplicação**
 
+<p align="center">
+<img src="https://imgur.com/U5wirVr.png" width="50%">
+</p>
+
+<p align="center">
+<img src="https://imgur.com/uO3TeNU.png" width="20%">
+<img src="https://imgur.com/SaPiyzV.png" width="20%">
+</p>
+
+<p align="center">
+<img src="https://imgur.com/NzdTum1.png" width="50%">
+</p>
 
 **Planejamento do projeto**
 
-#### Sprint 1
+* Sprint 1
+
 | Descrição       | Valor              |
 |-----------------|--------------------|
 | Data de início  | 26/10/2022         |
@@ -41,5 +54,5 @@
 | Exibir mapa com destinos de interesse marcados|   [#5](https://github.com/Eslley/desafio-react/issues/5)   |    4   |      Finalizada  |
 | Implementar CI/CD                             |   [#6](https://github.com/Eslley/desafio-react/issues/6)   |  0.5   |      Finalizada  |
 | Implementar Lazy Loading nos selects          |   [#7](https://github.com/Eslley/desafio-react/issues/7)   |    0   |     Descartada   |
-| Mecanismo de busca para países e cidades      |   [#8](https://github.com/Eslley/desafio-react/issues/8)   |    2   |         |
+| Mecanismo de busca para países e cidades      |   [#8](https://github.com/Eslley/desafio-react/issues/8)   |    2   |    Pendente   |
 | Criar component de toast messages             |   [#9](https://github.com/Eslley/desafio-react/issues/9)   |  0.5   |     Finalizada   |
