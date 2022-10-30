@@ -96,10 +96,12 @@ function Form({ register, errors }) {
                             </InputAdornment>
                         ),
                     }}
-                    {...register("cpf", { required: true, pattern: {
-                        value: /\d{3}\.\d{3}\.\d{3}\-\d{2}/,
-                        message: "CPF inválido"
-                    } })}
+                    {...register("cpf", {
+                        required: true, pattern: {
+                            value: /\d{3}\.\d{3}\.\d{3}\-\d{2}/,
+                            message: "CPF inválido"
+                        }
+                    })}
                     onInput={maskCPF}
                     helperText={errors.cpf?.type === 'required' ? "O CPF é obrigatório" : errors.cpf && errors.cpf.message}
                     error={!!errors.cpf}

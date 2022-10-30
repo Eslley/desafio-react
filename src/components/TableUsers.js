@@ -11,7 +11,7 @@ function TableUsers() {
     useEffect(() => {
         const localData = JSON.parse(localStorage.getItem("users"))
 
-        if (localData.length > 0) {
+        if (localData && localData.length > 0) {
             setUsers(localData)
         }
     }, [])
@@ -39,7 +39,7 @@ function TableUsers() {
                                     sx={{ ":hover": { backgroundColor: "rgba(51, 153, 255, 0.2)" }, cursor: "pointer" }}
                                     key={index}
                                     onClick={() => openModal(index)}>
-                                    <TableCell component="th" scope="row">
+                                    <TableCell align="center">
                                         {user.name}
                                     </TableCell>
                                     <TableCell align="center">

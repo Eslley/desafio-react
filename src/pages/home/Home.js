@@ -10,6 +10,7 @@ import { useAlertMessage } from "../../components/AlertMessageProvider"
 import TableUsers from "../../components/TableUsers"
 import { useToastMessage } from "../../components/ToastMessageProvider"
 import { Link } from "react-router-dom"
+import logo from "../../assets/img/logo_ally.png"
 
 const defaultValues = {
     name: "",
@@ -87,6 +88,10 @@ function Home() {
     }
 
     return (
+        <>
+        <Box textAlign="center" mb="2em">
+            <img width="190" alt="logo Ally Hub" src={logo} />
+        </Box>
         <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container >
 
@@ -148,6 +153,7 @@ function Home() {
                 </Grid>
             </Grid>
         </form>
+        </>
     )
 }
 

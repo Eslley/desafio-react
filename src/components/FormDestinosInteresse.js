@@ -4,24 +4,30 @@ import apiServices from "../providers/http"
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
-const MenuProps = {
+const MenuPropsCountries = {
+    anchorOrigin: {
+        vertical: "top",
+        horizontal: "left"
+    },
+    transformOrigin: {
+        vertical: "bottom",
+        horizontal: "left"
+    },
     PaperProps: {
         style: {
             maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250,
+            width: 250
         },
     },
 };
-
-
-function getStyles(name, countryName) {
-    return {
-        fontWeight:
-            countryName.indexOf(name) === -1
-                ? "400"
-                : "500",
-    };
-}
+const MenuPropsCities = {
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 250
+        },
+    },
+};
 
 function FormDestinosInteresse({
     formData,
@@ -145,13 +151,13 @@ function FormDestinosInteresse({
                         onChange={handleChangeCountry}
                         input={<OutlinedInput id="select-multiple-chip" label="Países" />}
                         renderValue={(selected) => (
-                            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, zIndex: 999 }}>
                                 {selected.map((value) => (
-                                    <Chip color="primary" key={value} label={value} />
+                                    <Chip onDelete={handleChangeCountry} color="primary" key={value} label={value} />
                                 ))}
                             </Box>
                         )}
-                        MenuProps={MenuProps}
+                        MenuProps={MenuPropsCountries}
                         error={errorCountries !== ''}
                     >
                         {countries.map((country, index) => (
@@ -159,7 +165,7 @@ function FormDestinosInteresse({
                                 key={index}
                                 value={country.name_ptbr}
                                 data-code={country.code}
-                                style={getStyles(country.name_ptbr, countryName)}
+                                sx={{ whiteSpace: 'pre-wrap', overflowWrap: 'break-word' }}
                                 onClick={addCountry}
                             >
                                 {country.name_ptbr}
@@ -186,10 +192,10 @@ function FormDestinosInteresse({
                                 ))}
                             </Box>
                         )}
-                        MenuProps={MenuProps}
+                        MenuProps={MenuPropsCities}
                         error={errorCities !== ''}
                     >
-                        {filteredCities.map((city, index) => (
+                        {filteredCities.length > 0 ? filteredCities.map((city, index) => (
                             <MenuItem
                                 key={index}
                                 value={city.name_ptbr}
@@ -197,12 +203,16 @@ function FormDestinosInteresse({
                                 data-country-code={city.country_code}
                                 data-lat={city.lat}
                                 data-log={city.log}
-                                style={getStyles(city.name_ptbr, cityName)}
+                                style={{ whiteSpace: 'pre-wrap', overflowWrap: 'break-word' }}
                                 onClick={addCity}
                             >
                                 {city.name_ptbr}
                             </MenuItem>
-                        ))}
+                        )) : 
+                            <MenuItem disabled>
+                                Sem cidades
+                            </MenuItem>
+                        }
                     </Select>
                     <FormHelperText>{errorCities !== '' && errorCities}</FormHelperText>
                 </FormControl>
