@@ -88,7 +88,7 @@ function Form({ register, errors }) {
                     margin='normal'
                     sx={{ width: 300 }}
                     label="CPF"
-                    type="text"
+                    type="number"
                     InputProps={{
                         startAdornment: (
                             <InputAdornment position="start">
