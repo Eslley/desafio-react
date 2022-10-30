@@ -48,6 +48,11 @@ function FormDestinosInteresse({
 
     const [cities, setCities] = useState([])
 
+
+    useEffect(() => {
+        console.log(formData)
+    }, [formData])
+
     useEffect(() => {
         apiServices.getCountries()
             .then(res => {
@@ -140,10 +145,37 @@ function FormDestinosInteresse({
         }
     }
 
-    // function removeCountry(country) {
-    //     const newCountries = countryName.filter(c => c !== country)
-    //     setCountryName(newCountries)
-    // }
+    function removeCountry(country) {
+        //remove o país do chip
+        const newCountries = countryName.filter(c => c !== country)
+        setCountryName(newCountries)
+
+        //busca índice do país
+        const index = countries.findIndex((e) =>  {
+           return  e.name_ptbr === country
+        })
+
+        //obtém code do país
+        const code = countries[index].code
+
+        //remove as cidades do país que saiu da seleção
+        let cities = filteredCities.filter((city) => city.country_code !== code)
+        setFilteredCities(cities)
+        let citiesNames = cityName.filter((city) => {
+            let achou = false
+            cities.forEach(element => {
+                if (city === element.name_ptbr)
+                    achou = true
+            })
+            return achou
+        })
+        setCityName(citiesNames)
+
+        //remove país dos dados de formulário
+        let newFormData = { ...formData }
+        delete newFormData[code]
+        setFormData({ ...newFormData })
+    }
 
     return (
         <Grid container direction="column" textAlign="center">
@@ -159,7 +191,10 @@ function FormDestinosInteresse({
                         renderValue={(selected) => (
                             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, zIndex: 9999 }}>
                                 {selected.map((value) => (
-                                    <Chip
+                                    <Chip deleteIcon={<Delete />} onDelete={() => removeCountry(value)}
+                                        onMouseDown={(event) => {
+                                            event.stopPropagation();
+                                        }}
                                         color="primary" key={value} label={value} />
                                 ))}
                             </Box>
