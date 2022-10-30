@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+**Descrição do projeto**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+* Aplicação single page para gerenciamento de destinos de interesse (países e cidades)
 
-## Available Scripts
+**Funcinalidades**
 
-In the project directory, you can run:
+* Cadastro de dados pessoais
+* Cadastro de destinos de interesse
+* Exibição de todos os dados pessoais cadastrados
+* Exibição de destinos de interesse em mapa interativo
 
-### `npm start`
+**Tecnologias/Bibliotecas Utilizadas**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* React
+* Material UI
+* React Hook Form
+* React Leaflet
+* Axios
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**Snapshot da aplicação**
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Planejamento do projeto**
 
-### `npm run build`
+#### Sprint 1
+| Descrição       | Valor              |
+|-----------------|--------------------|
+| Data de início  | 26/10/2022         |
+| Data de término | 30/10/2022         |
+| Total de pontos | 22                 |
+| Duração         | 5 dias             |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Issues da Sprint
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+|                                      Atividade                                      | Issues | Pontos | Status |
+|:-----------------------------------------------------------------------------------:|:------:|:------:|:----------:|
+| Criar formulário de cadastro de dados pessoais|   [#1](https://github.com/Eslley/desafio-react/issues/1)   |    4   |     Finalizada   |
+| Criar formulário de destinos de interesse     |   [#2](https://github.com/Eslley/desafio-react/issues/2)   |    6   |     Finalizada   |
+| Salvar dados pessoais e destinos de interesse |   [#3](https://github.com/Eslley/desafio-react/issues/3)   |    2   |    Finalizada    |
+| Exibir todos os dados pessoais cadastrados    |   [#4](https://github.com/Eslley/desafio-react/issues/4)   |    3   |     Finalizada   |
+| Exibir mapa com destinos de interesse marcados|   [#5](https://github.com/Eslley/desafio-react/issues/5)   |    4   |      Finalizada  |
+| Implementar CI/CD                             |   [#6](https://github.com/Eslley/desafio-react/issues/6)   |  0.5   |      Finalizada  |
+| Implementar Lazy Loading nos selects          |   [#7](https://github.com/Eslley/desafio-react/issues/7)   |    0   |     Descartada   |
+| Mecanismo de busca para países e cidades      |   [#8](https://github.com/Eslley/desafio-react/issues/8)   |    2   |         |
+| Criar component de toast messages             |   [#9](https://github.com/Eslley/desafio-react/issues/9)   |  0.5   |     Finalizada   |
