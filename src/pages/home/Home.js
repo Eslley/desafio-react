@@ -81,12 +81,6 @@ function Home() {
         showAlert('', 'Informações salvas com sucesso!', 'success', 4000)
     }
 
-    function openTable() {
-        setTimeout(() => {
-            showToast('Clique na célula para exibir os destinos de interesse!', 5000)
-        }, 3000)
-    }
-
     return (
         <>
         <Box textAlign="center" mb="2em">
@@ -143,7 +137,7 @@ function Home() {
                     <Box sx={{ mt: '1em' }}>
                         <Tooltip title="Exibir usuários cadastrados" arrow>
                             <Link style={{textDecoration: 'none'}} to='/desafio-react/users'>
-                            <Fab onClick={openTable} variant="extended" color="primary" aria-label="add">
+                            <Fab variant="extended" color="primary" aria-label="add">
                                 <List />
                                 Listar
                             </Fab>

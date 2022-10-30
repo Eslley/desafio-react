@@ -16,7 +16,8 @@ const MenuPropsCountries = {
     PaperProps: {
         style: {
             maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250
+            width: 250,
+            '.MuiSelected': { backgroundColor: 'red' }
         },
     },
 };
@@ -165,7 +166,10 @@ function FormDestinosInteresse({
                                 key={index}
                                 value={country.name_ptbr}
                                 data-code={country.code}
-                                sx={{ whiteSpace: 'pre-wrap', overflowWrap: 'break-word' }}
+                                sx={{ 
+                                    whiteSpace: 'pre-wrap', 
+                                    overflowWrap: 'break-word', 
+                                    '&.Mui-selected': { backgroundColor: 'rgba(25, 118, 210, 0.15);' } }}
                                 onClick={addCountry}
                             >
                                 {country.name_ptbr}
@@ -203,13 +207,16 @@ function FormDestinosInteresse({
                                 data-country-code={city.country_code}
                                 data-lat={city.lat}
                                 data-log={city.log}
-                                style={{ whiteSpace: 'pre-wrap', overflowWrap: 'break-word' }}
+                                sx={{ 
+                                    whiteSpace: 'pre-wrap', 
+                                    overflowWrap: 'break-word',
+                                    '&.Mui-selected': { backgroundColor: 'rgba(25, 118, 210, 0.15);' } }}
                                 onClick={addCity}
                             >
                                 {city.name_ptbr}
                             </MenuItem>
                         )) : 
-                            <MenuItem disabled>
+                            <MenuItem>
                                 Sem cidades
                             </MenuItem>
                         }

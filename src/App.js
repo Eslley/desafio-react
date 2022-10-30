@@ -9,7 +9,7 @@ function App() {
   return (
       <Router>
 
-        <Container sx={{ height: '100%', mt: '10%', pb: '1em', }}>
+        <Container sx={{ height: '100%', mt: '100px', pb: '1em', }}>
           <AlertMessageProvider>
             <ToastMessageProvider>
               

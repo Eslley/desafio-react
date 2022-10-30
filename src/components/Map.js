@@ -28,7 +28,7 @@ function Map({ open, setOpen, user }) {
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx={style}>
-                        <Typography id="modal-modal-title" textAlign='center' variant="h6" component="h2">
+                        <Typography color="#5E6C84" id="modal-modal-title" textAlign='center' variant="h6" component="h2">
                             Destinos de {user.name}
                         </Typography>
                         <MapContainer
