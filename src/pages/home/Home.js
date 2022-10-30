@@ -9,6 +9,7 @@ import FormDestinosInteresse from "../../components/FormDestinosInteresse"
 import { useAlertMessage } from "../../components/AlertMessageProvider"
 import TableUsers from "../../components/TableUsers"
 import { useToastMessage } from "../../components/ToastMessageProvider"
+import { Link } from "react-router-dom"
 
 const defaultValues = {
     name: "",
@@ -22,7 +23,7 @@ function Home() {
     const { register, formState: { errors }, handleSubmit, reset } = useForm({ mode: 'onChange' })
     const onSubmit = data => {
         const localData = { ...data, places: formData }
-        if(!validateSelects()) {
+        if (!validateSelects()) {
             showToast('O formulário contém erros!', 4000)
             return
         }
@@ -32,7 +33,7 @@ function Home() {
     function validateSelects() {
         let validate = true
 
-        if (countryName.length === 0){
+        if (countryName.length === 0) {
             setErrorCountries('Informe os países de interesse')
             validate = false
         }
@@ -52,10 +53,9 @@ function Home() {
 
     const { showAlert } = useAlertMessage()
     const { showToast } = useToastMessage()
-    const [showTable, setShowTable] = useState(false)
 
-    const [ errorCities, setErrorCities ] = useState('')
-    const [ errorCountries, setErrorCountries ] = useState('')
+    const [errorCities, setErrorCities] = useState('')
+    const [errorCountries, setErrorCountries] = useState('')
 
     function resetForm() {
         reset(defaultValues)
@@ -81,88 +81,73 @@ function Home() {
     }
 
     function openTable() {
-        setShowTable(true)
         setTimeout(() => {
             showToast('Clique na célula para exibir os destinos de interesse!', 5000)
         }, 3000)
     }
 
     return (
-        <>
-            {showTable ? (
-                <>
-                    <TableUsers />
-                    <Grid item container justifyContent="center" xs={12}>
-                        <Box sx={{ mt: '1em' }}>
-                            <Fab onClick={() => setShowTable(false)} variant="extended" color="primary" aria-label="add">
-                                <ArrowBack />
-                                Voltar
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <Grid container >
+
+                <Grid item container mb="1em" justifyContent="center" xs={12} md={6}>
+                    <CardForm title="Dados Pessoais" content={
+                        <FormDadosPessoais register={register} errors={errors} />
+                    } />
+                </Grid>
+
+                <Grid item container mb="1em" justifyContent="center" xs={12} md={6}>
+                    <CardForm title="Destinos de Interresse" content={
+                        <FormDestinosInteresse
+                            formData={formData}
+                            setFormData={setFormData}
+                            countryName={countryName}
+                            setCountryName={setCountryName}
+                            cityName={cityName}
+                            setCityName={setCityName}
+                            errorCities={errorCities}
+                            setErrorCities={setErrorCities}
+                            errorCountries={errorCountries}
+                            setErrorCountries={setErrorCountries} />
+                    } />
+                </Grid>
+
+            </Grid>
+
+
+            <Grid container justifyContent="center">
+                <Grid item container justifyContent="center" xs={5} sm={3} md={2}>
+                    <Box sx={{ mt: '2em' }}>
+                        <Fab onClick={resetForm} variant="extended" color="primary" aria-label="add">
+                            <ClearAll />
+                            Limpar
+                        </Fab>
+                    </Box>
+                </Grid>
+
+                <Grid item container justifyContent="center" xs={5} sm={3} md={2}>
+                    <Box sx={{ mt: '2em' }}>
+                        <Fab type="submit" variant="extended" color="primary" aria-label="add">
+                            <Save />
+                            Salvar
+                        </Fab>
+                    </Box>
+                </Grid>
+
+                <Grid item container justifyContent="center" xs={12}>
+                    <Box sx={{ mt: '1em' }}>
+                        <Tooltip title="Exibir usuários cadastrados" arrow>
+                            <Link style={{textDecoration: 'none'}} to='/desafio-react/users'>
+                            <Fab onClick={openTable} variant="extended" color="primary" aria-label="add">
+                                <List />
+                                Listar
                             </Fab>
-                        </Box>
-                    </Grid>
-                </>
-            ) :
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <Grid container >
-
-                        <Grid item container mb="1em" justifyContent="center" xs={12} md={6}>
-                            <CardForm title="Dados Pessoais" content={
-                                <FormDadosPessoais register={register} errors={errors} />
-                            } />
-                        </Grid>
-
-                        <Grid item container mb="1em" justifyContent="center" xs={12} md={6}>
-                            <CardForm title="Destinos de Interresse" content={
-                                <FormDestinosInteresse
-                                    formData={formData}
-                                    setFormData={setFormData}
-                                    countryName={countryName}
-                                    setCountryName={setCountryName}
-                                    cityName={cityName}
-                                    setCityName={setCityName}
-                                    errorCities={errorCities}
-                                    setErrorCities={setErrorCities}
-                                    errorCountries={errorCountries}
-                                    setErrorCountries={setErrorCountries} />
-                            } />
-                        </Grid>
-
-                    </Grid>
-
-
-                    <Grid container justifyContent="center">
-                        <Grid item container justifyContent="center" xs={5} sm={3} md={2}>
-                            <Box sx={{ mt: '2em' }}>
-                                <Fab onClick={resetForm} variant="extended" color="primary" aria-label="add">
-                                    <ClearAll />
-                                    Limpar
-                                </Fab>
-                            </Box>
-                        </Grid>
-
-                        <Grid item container justifyContent="center" xs={5} sm={3} md={2}>
-                            <Box sx={{ mt: '2em' }}>
-                                <Fab type="submit" variant="extended" color="primary" aria-label="add">
-                                    <Save />
-                                    Salvar
-                                </Fab>
-                            </Box>
-                        </Grid>
-
-                        <Grid item container justifyContent="center" xs={12}>
-                            <Box sx={{ mt: '1em' }}>
-                            <Tooltip title="Exibir usuários cadastrados" arrow>
-                                <Fab onClick={openTable} variant="extended" color="primary" aria-label="add">
-                                    <List />
-                                    Listar
-                                </Fab>
-                                </Tooltip>
-                            </Box>
-                        </Grid>
-                    </Grid>
-                </form>
-            }
-        </>
+                            </Link>
+                        </Tooltip>
+                    </Box>
+                </Grid>
+            </Grid>
+        </form>
     )
 }
 
