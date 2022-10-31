@@ -20,16 +20,16 @@
 **Snapshot da aplicação**
 
 <p align="center">
-<img src="https://imgur.com/U5wirVr.png" width="50%">
+<img src="https://imgur.com/U5wirVr.png" width="70%">
 </p>
 
 <p align="center">
-<img src="https://imgur.com/uO3TeNU.png" width="20%">
-<img src="https://imgur.com/SaPiyzV.png" width="20%">
+<img src="https://imgur.com/uO3TeNU.png" width="35%">
+<img src="https://imgur.com/SaPiyzV.png" width="35%">
 </p>
 
 <p align="center">
-<img src="https://imgur.com/NzdTum1.png" width="50%">
+<img src="https://imgur.com/NzdTum1.png" width="70%">
 </p>
 
 **Planejamento do projeto**
@@ -43,7 +43,7 @@
 | Total de pontos | 22                 |
 | Duração         | 5 dias             |
 
-#### Issues da Sprint
+* Issues da Sprint
 
 |                                      Atividade                                      | Issues | Pontos | Status |
 |:-----------------------------------------------------------------------------------:|:------:|:------:|:----------:|
